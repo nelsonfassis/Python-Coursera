@@ -11,19 +11,19 @@ def add_client():
 		client_cpf = input("Inser client CPF: ")
 		client_company = raw_input("Insert client's company name: ").lower()
 		print client_company
-		cur.execute('''INSERT OR IGNORE INTO Clients(name, cpf, company_id) values (?,?,?)''',(client_name,client_cpf,client_company))
+		cur.execute('''INSERT OR IGNORE INTO Clients (name, cpf, company_id) VALUES (?,?,?)''', (client_name,client_cpf,client_company) )		
 		conn.commit()
-		cur.close()
-
+		#cur.close()
+		
 def add_company():
 	print "To break the loop, do not insert any value into the Company name"
 	while True:
 		company_name = raw_input("Insert company name: ")
 		if len(company_name) <= 1 : break
 		company_cnpj = input("Inser CNPJ: ")
-		cur.execute('''INSERT OR IGNORE INTO Company(name, cnpj) values (?,?)''',(company_name,cnpj))
+		cur.execute('''INSERT OR IGNORE INTO Company(name, cnpj) values (?,?)''',(company_name,company_cnpj))
 		conn.commit()
-
+		
 def whatodo():
 	print ("What would you like to do?")
 	print ("1 - Register a company \n2 - Register a user\n 3 - Show users")
@@ -37,26 +37,27 @@ def whatodo():
 	#	show_users()
 	else: print("Invalid input")
 			
-	
-
 #cur.close()
-#cur.execute('''
-#DROP TABLE IF EXISTS Clients''')
+cur.execute('''
+DROP TABLE IF EXISTS Clients''')
 
-#cur.execute('''
-#DROP TABLE IF EXISTS Company''')
+cur.execute('''
+DROP TABLE IF EXISTS Company''')
 
 cur.executescript('''
-CREATE IF NOT EXISTS TABLE Clients
-(id INTENGER PRIMARY KEY NOT NULL,
-name TEXT, 
-cpf INTEGER,
-company_id);
+CREATE TABLE Clients
+(
+id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+name	TEXT, 
+cpf	INTEGER,
+company_id INTEGER
+);
 
-CREATE IF NOT EXISTS TABLE Company
-(id INTENGER PRIMARY KEY NOT NULL,
+CREATE TABLE Company
+(
+id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 name TEXT, 
-cnpj INTEGER);
+cnpj INTEGER)
 ''')
 
 whatodo()
