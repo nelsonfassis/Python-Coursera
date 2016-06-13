@@ -13,7 +13,6 @@ def add_client():
 		print client_company
 		cur.execute('''INSERT OR IGNORE INTO Clients (name, cpf, company_id) VALUES (?,?,?)''', (client_name,client_cpf,client_company) )		
 		conn.commit()
-		#cur.close()
 		
 def add_company():
 	print "To break the loop, do not insert any value into the Company name"
@@ -26,10 +25,9 @@ def add_company():
 		conn.commit()
 
 def show_users():
-	value = cur.execute('''
+	for row in cur.execute('''
 	SELECT Clients.name, Company.name FROM Clients JOIN Company ON Clients.company_id = Company.id
-	''')
-	for row in value:
+	'''):
 		print row
 		
 def whatodo():
@@ -48,12 +46,6 @@ def whatodo():
 	if decision == 4: quit()
 	else: print("Invalid input")
 			
-#cur.close()
-#cur.execute('''
-#DROP TABLE IF EXISTS Clients''')
-
-#cur.execute('''
-#DROP TABLE IF EXISTS Company''')
 
 cur.executescript('''
 CREATE TABLE IF NOT EXISTS Clients
@@ -72,9 +64,3 @@ cnpj INTEGER)
 ''')
 
 whatodo()
-
-result = cur.execute('''SELECT name,cpf FROM Clients''')
-print str(result)
-
-
-#Add test to commit#
