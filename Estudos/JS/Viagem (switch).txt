@@ -1,0 +1,16 @@
+// Write your code below!
+viagem = prompt("Pra que tipo de lugar você gostaria de viajar nas férias?","Praia, montanha ou cachoeira?");
+
+switch(viagem) {
+    case 'praia':
+        console.log("Eu também gosto de "+viagem);
+        break;
+    case 'montanha':
+        console.log("Quanto mais alta a"+viagem+" melhor =D ");
+        break;
+    case 'cachoeira':
+        console.log("Eu também adoro, mas tenho medo de "+viagem);
+        break;
+    default:
+        console.log("Por favor, escolha alguma das outras opçoes");
+};
