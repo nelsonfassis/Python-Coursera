@@ -10,7 +10,8 @@ cur.executescript =('''CREATE TABLE Counts (
     );
 
 	INSERT into Counts (org)
-	VALUES( ?, )''', (org, ) )
+	VALUES( ? )''', (org, ) )
 
 cur.execute('SELECT count FROM Counts WHERE org = ? ', (org, ))
 row = cur.fetchone()
+print "teste remoto" 
