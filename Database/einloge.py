@@ -64,3 +64,6 @@ whatodo()
 
 result = cur.execute('''SELECT name,cpf FROM Clients''')
 print str(result)
+
+
+#Add test to commit#
